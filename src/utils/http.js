@@ -2,7 +2,7 @@
  * @Author       : liulib
  * @Date         : 2020-07-21 11:05:10
  * @LastEditors  : liulib
- * @LastEditTime : 2020-07-21 15:22:37
+ * @LastEditTime : 2020-07-22 01:16:31
  * uni.request封装
  * 请求拦截、响应拦截、错误统一处理
  */
