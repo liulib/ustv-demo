@@ -2,7 +2,7 @@
  * @Author       : liulib
  * @Date         : 2020-07-20 17:16:27
  * @LastEditors  : liulib
- * @LastEditTime : 2020-07-22 16:20:12
+ * @LastEditTime : 2020-07-22 16:34:45
 --> 
 <template>
   <view class="content">
@@ -55,9 +55,9 @@ export default {
     }
   },
   onLoad() {
-    this._getBanner()
-    this._getRecent()
-    this._getRecommend()
+    // this._getBanner()
+    // this._getRecent()
+    // this._getRecommend()
   },
   methods: {
     search() {},

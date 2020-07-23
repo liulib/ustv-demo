@@ -2,7 +2,7 @@
  * @Author       : liulib
  * @Date         : 2020-07-20 17:29:08
  * @LastEditors  : liulib
- * @LastEditTime : 2020-07-22 16:07:07
+ * @LastEditTime : 2020-07-22 16:34:52
 --> 
 <template>
   <view class="content">
@@ -119,7 +119,7 @@ export default {
     }
   },
   onLoad() {
-    this._getTvBycate()
+    // this._getTvBycate()
   },
   methods: {
     areaChange: function(e) {
