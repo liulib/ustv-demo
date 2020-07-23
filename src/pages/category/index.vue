@@ -2,7 +2,7 @@
  * @Author       : liulib
  * @Date         : 2020-07-20 17:29:08
  * @LastEditors  : liulib
- * @LastEditTime : 2020-07-23 15:14:44
+ * @LastEditTime : 2020-07-24 00:32:47
 --> 
 <template>
   <view class="content">
@@ -115,14 +115,18 @@ export default {
   methods: {
     areaChange: function(e) {
       this.areaIndex = e.target.value
-      this.queryInfo.diqu = this.areaArray[this.areaIndex]
+      this.queryInfo.diqu = Number(this.areaIndex)
+        ? this.areaArray[this.areaIndex]
+        : ''
       this.queryInfo.page = 1
       this.TvList = []
       this._getTvBycate()
     },
     categoryChange: function(e) {
       this.categoryIndex = e.target.value
-      this.queryInfo.type = this.categoryArray[this.areaIndex]
+      this.queryInfo.type = Number(this.categoryIndex)
+        ? this.categoryArray[this.categoryIndex]
+        : ''
       this.queryInfo.page = 1
       this.TvList = []
       this._getTvBycate()
