@@ -2,7 +2,7 @@
  * @Author       : liulib
  * @Date         : 2020-07-20 17:29:08
  * @LastEditors  : liulib
- * @LastEditTime : 2020-07-22 16:34:52
+ * @LastEditTime : 2020-07-23 15:14:44
 --> 
 <template>
   <view class="content">
@@ -57,19 +57,8 @@
         <view class="scroll-warp">
           <!-- 剧集信息 -->
           <view v-for="item in TvList" :key="item.id" class="scroll-item">
-            <cover-image :src="item.pic" />
-            <!-- 状态信息 -->
-            <view class="state">
-              <text>{{item.state}}</text>
-            </view>
-            <!-- 评分 -->
-            <view class="score">
-              <text>{{item.pf}}</text>
-            </view>
-            <!-- 剧名 -->
-            <view class="name">
-              <text>{{item.name}}</text>
-            </view>
+            <!-- TvInfo组件 -->
+            <TvInfo :tvInfo="item"></TvInfo>
           </view>
         </view>
       </scroll-view>
@@ -78,6 +67,7 @@
 </template>
 
 <script>
+import TvInfo from '../../components/TvInfo'
 export default {
   data() {
     return {
@@ -118,8 +108,9 @@ export default {
       TvList: []
     }
   },
+  components: { TvInfo },
   onLoad() {
-    // this._getTvBycate()
+    this._getTvBycate()
   },
   methods: {
     areaChange: function(e) {
@@ -195,39 +186,6 @@ export default {
           font-size: $uni-font-size-sm;
           width: 200rpx;
           margin: 10rpx;
-          cover-image {
-            width: 200rpx;
-            height: 300rpx;
-            border-radius: 10rpx;
-            background: linear-gradient(#fff 80%, #000 100%);
-          }
-          .state {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            bottom: 50rpx;
-            color: #fff;
-            font-size: 20rpx;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-          }
-          .score {
-            background-color: #e54d42;
-            border-radius: 15rpx;
-            padding: 3rpx 10rpx;
-            color: #fff;
-            position: absolute;
-            top: 0;
-            right: 0;
-          }
-          .name {
-            width: 200rpx;
-            text-align: center;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-          }
         }
       }
     }

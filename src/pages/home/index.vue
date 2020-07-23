@@ -2,7 +2,7 @@
  * @Author       : liulib
  * @Date         : 2020-07-20 17:16:27
  * @LastEditors  : liulib
- * @LastEditTime : 2020-07-22 16:34:45
+ * @LastEditTime : 2020-07-23 14:52:00
 --> 
 <template>
   <view class="content">
@@ -18,17 +18,16 @@
       </swiper-item>
     </swiper>
     <!-- 最近更新 -->
-    <tvSwiper :tvData="recentData"></tvSwiper>
+    <tvSwiper :tvList="recentData"></tvSwiper>
     <!-- 美剧榜 -->
-    <tvSwiper :tvData="rankData"></tvSwiper>
+    <tvSwiper :tvList="rankData"></tvSwiper>
     <!-- 经典推荐 -->
-    <tvSwiper :tvData="classicData"></tvSwiper>
+    <tvSwiper :tvList="classicData"></tvSwiper>
   </view>
 </template>
 
 <script>
 import tvSwiper from '../../components/TvSwiper'
-// import { myRequest } from '../../utils/http'
 export default {
   components: {
     tvSwiper
@@ -55,9 +54,9 @@ export default {
     }
   },
   onLoad() {
-    // this._getBanner()
-    // this._getRecent()
-    // this._getRecommend()
+    this._getBanner()
+    this._getRecent()
+    this._getRecommend()
   },
   methods: {
     search() {},
