@@ -2,7 +2,7 @@
  * @Author       : liulib
  * @Date         : 2020-07-23 14:41:07
  * @LastEditors  : liulib
- * @LastEditTime : 2020-07-23 16:33:27
+ * @LastEditTime : 2020-07-25 00:11:26
 --> 
 <template>
   <view class="content">
@@ -27,7 +27,7 @@
 <script>
 export default {
   props: {
-    tvInfo: Object
+    tvInfo: Object,
   },
   created() {},
   methods: {
@@ -35,10 +35,10 @@ export default {
     clickTv() {
       console.log('被点击了')
       uni.navigateTo({
-        url: `/pages/detail/index?id=${this.tvInfo.id}`
+        url: `/pages/detail/index?id=${this.tvInfo.id}`,
       })
-    }
-  }
+    },
+  },
 }
 </script>
   
@@ -49,18 +49,20 @@ export default {
     width: 200rpx;
     height: 300rpx;
     border-radius: 10rpx;
-    background: linear-gradient(#fff 80%, #000 100%);
   }
   .state {
+    width: 200rpx;
     position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: 50rpx;
+    border-radius: 0 0 10rpx 10rpx;
+    bottom: 30rpx;
     color: #fff;
     font-size: 20rpx;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    padding: 20rpx 0;
+    background: rgba(0, 0, 0, 0.2);
+    text-align: center;
   }
   .score {
     background-color: #e54d42;
