@@ -2,7 +2,7 @@
  * @Author       : liulib
  * @Date         : 2020-07-20 17:29:15
  * @LastEditors  : liulib
- * @LastEditTime : 2020-07-22 19:05:00
+ * @LastEditTime : 2020-07-25 00:57:52
 --> 
 <template>
   <view class="content">
@@ -15,7 +15,9 @@
           <text v-else>未登录</text>
         </view>
         <!-- 用户名 -->
-        <text>{{nickName}}</text>
+        <view class="name">
+          <text>{{nickName}}</text>
+        </view>
       </view>
     </view>
     <!-- 相关操作 -->
@@ -43,20 +45,26 @@ export default {
   data() {
     return {
       nickName: '',
-      avatarUrl: ''
+      avatarUrl: '',
     }
   },
   onLoad() {
+    // 显示loading
+    uni.showLoading({
+      title: '加载中',
+    })
     // 获取用户信息
     uni.getUserInfo({
       provider: 'weixin',
-      success: function(infoRes) {
+      success: function (infoRes) {
         uni.setStorageSync('avatarUrl', infoRes.userInfo.avatarUrl)
         uni.setStorageSync('nickName', infoRes.userInfo.nickName)
-      }
+      },
     })
     this.nickName = uni.getStorageSync('nickName')
     this.avatarUrl = uni.getStorageSync('avatarUrl')
+    // 隐藏loading
+    uni.hideLoading()
     // uni.login({
     //   provider: 'weixin',
     //   success: function(loginRes) {
@@ -64,7 +72,7 @@ export default {
     //   }
     // })
   },
-  methods: {}
+  methods: {},
 }
 </script>
 
@@ -87,13 +95,16 @@ export default {
         height: 180rpx;
         line-height: 180rpx;
         border-radius: 50%;
-        margin-bottom: 20rpx;
+        margin: 0 auto;
         background-color: #cccccc;
         color: #fff;
         text-align: center;
         cover-image {
           border-radius: 50%;
         }
+      }
+      .name {
+        margin-top: 20rpx;
       }
     }
   }

@@ -2,7 +2,7 @@
  * @Author       : liulib
  * @Date         : 2020-07-20 17:29:08
  * @LastEditors  : liulib
- * @LastEditTime : 2020-07-24 00:32:47
+ * @LastEditTime : 2020-07-25 00:45:33
 --> 
 <template>
   <view class="content">
@@ -52,7 +52,7 @@
       </view>
     </view>
     <!-- TvList展示区域 -->
-    <view class="tv-container">
+    <view class="tv-container" v-if="TvList">
       <scroll-view scroll-y="true" class="scroll-Y" @scrolltolower="lower">
         <view class="scroll-warp">
           <!-- 剧集信息 -->
@@ -93,7 +93,7 @@ export default {
         '科幻',
         '纪录片',
         '同性',
-        '音乐'
+        '音乐',
       ],
       categoryIndex: 0,
       sortArray: ['时间'],
@@ -103,9 +103,9 @@ export default {
         page: 1,
         desc: 'updateTime',
         diqu: '',
-        type: ''
+        type: '',
       },
-      TvList: []
+      TvList: [],
     }
   },
   components: { TvInfo },
@@ -113,7 +113,7 @@ export default {
     this._getTvBycate()
   },
   methods: {
-    areaChange: function(e) {
+    areaChange: function (e) {
       this.areaIndex = e.target.value
       this.queryInfo.diqu = Number(this.areaIndex)
         ? this.areaArray[this.areaIndex]
@@ -122,7 +122,7 @@ export default {
       this.TvList = []
       this._getTvBycate()
     },
-    categoryChange: function(e) {
+    categoryChange: function (e) {
       this.categoryIndex = e.target.value
       this.queryInfo.type = Number(this.categoryIndex)
         ? this.categoryArray[this.categoryIndex]
@@ -131,7 +131,7 @@ export default {
       this.TvList = []
       this._getTvBycate()
     },
-    sortChange: function(e) {
+    sortChange: function (e) {
       this.sortIndex = e.target.value
       this.queryInfo.desc = this.sortArray[this.areaIndex]
       this.queryInfo.page = 1
@@ -140,10 +140,14 @@ export default {
     },
     // 根据分类获取剧集数据
     async _getTvBycate() {
+      // 显示loading
+      uni.showLoading({
+        title: '加载中',
+      })
       try {
         const res = await this.$myRequest({
           url: 'https://api.bjxkhc.com/index.php/app/ios/vod/index',
-          data: this.queryInfo
+          data: this.queryInfo,
         })
         // TvList数据
         this.TvList = [...this.TvList, ...res.data.data]
@@ -151,13 +155,15 @@ export default {
       } catch (error) {
         uni.showToast(error)
       }
+      // 隐藏loading
+      uni.hideLoading()
     },
     // 触底事件
     lower() {
       this.queryInfo.page++
       this._getTvBycate()
-    }
-  }
+    },
+  },
 }
 </script>
 

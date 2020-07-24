@@ -2,7 +2,7 @@
  * @Author       : liulib
  * @Date         : 2020-07-20 17:16:27
  * @LastEditors  : liulib
- * @LastEditTime : 2020-07-24 10:41:22
+ * @LastEditTime : 2020-07-25 00:43:48
 --> 
 <template>
   <view class="content">
@@ -54,9 +54,15 @@ export default {
     }
   },
   onLoad() {
+    // 显示loading
+    uni.showLoading({
+      title: '加载中',
+    })
     this._getBanner()
     this._getRecent()
     this._getRecommend()
+    // 隐藏loading
+    uni.hideLoading()
   },
   methods: {
     search() {},

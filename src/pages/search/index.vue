@@ -2,7 +2,7 @@
  * @Author       : liulib
  * @Date         : 2020-07-24 10:35:51
  * @LastEditors  : liulib
- * @LastEditTime : 2020-07-24 11:35:35
+ * @LastEditTime : 2020-07-25 00:46:59
 --> 
 <template>
   <view class="content">
@@ -12,7 +12,7 @@
       <button size="mini" type="warn" @click="_getSearchRes">搜索</button>
     </view>
     <!-- 搜索结果区域 -->
-    <view class="result">
+    <view class="result" v-if="searchResultList">
       <!-- Tv信息展示区域 -->
       <scroll-view scroll-y="true" class="scroll-Y" @scrolltolower="lower">
         <view class="scroll-warp">
@@ -49,6 +49,10 @@ export default {
      * @return:
      */
     async _getSearchRes(type = '') {
+      // 显示loading
+      uni.showLoading({
+        title: '加载中',
+      })
       try {
         const res = await this.$myRequest({
           url: 'https://api.bjxkhc.com/index.php/app/ios/vod/index',
@@ -63,6 +67,8 @@ export default {
       } catch (error) {
         uni.showToast(error)
       }
+      // 隐藏loading
+      uni.hideLoading()
     },
     // 触底事件
     lower() {

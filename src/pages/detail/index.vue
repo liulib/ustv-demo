@@ -2,10 +2,10 @@
  * @Author       : liulib
  * @Date         : 2020-07-23 13:25:11
  * @LastEditors  : liulib
- * @LastEditTime : 2020-07-24 00:08:39
+ * @LastEditTime : 2020-07-25 00:44:23
 --> 
 <template>
-  <view class="content">
+  <view class="content" v-if="tvDetail.zu">
     <!-- 图片信息 -->
     <view class="pic" :style="{backgroundImage: `url(${tvDetail.pic})`}">
       <cover-image :src="tvDetail.pic"></cover-image>
@@ -44,11 +44,17 @@
 export default {
   data() {
     return {
-      tvDetail: {}
+      tvDetail: {},
     }
   },
-  onLoad: function(option) {
+  onLoad: function (option) {
+    // 显示loading
+    uni.showLoading({
+      title: '加载中',
+    })
     this._getTvById({ id: option.id })
+    // 隐藏loading
+    uni.hideLoading()
   },
   methods: {
     // 根据ID获取剧集详细信息
@@ -56,7 +62,7 @@ export default {
       try {
         const res = await this.$myRequest({
           url: 'https://api.bjxkhc.com/index.php/app/ios/vod/show',
-          data: id
+          data: id,
         })
         // TvDetail数据
         this.tvDetail = res.data.data
@@ -64,8 +70,8 @@ export default {
       } catch (error) {
         uni.showToast(error)
       }
-    }
-  }
+    },
+  },
 }
 </script>
 
