@@ -2,13 +2,13 @@
  * @Author       : liulib
  * @Date         : 2020-07-20 17:16:27
  * @LastEditors  : liulib
- * @LastEditTime : 2020-07-23 14:52:00
+ * @LastEditTime : 2020-07-24 10:41:22
 --> 
 <template>
   <view class="content">
     <!-- search-bar -->
     <view class="searchBar">
-      <input placeholder="搜索" />
+      <input placeholder="搜索" @focus="handleFocus" />
     </view>
     <!-- 轮播图 -->
     <swiper class="swiper" autoplay indicator-dots :indicator-active-color="'#ff0000'">
@@ -30,7 +30,7 @@
 import tvSwiper from '../../components/TvSwiper'
 export default {
   components: {
-    tvSwiper
+    tvSwiper,
   },
   data() {
     return {
@@ -39,18 +39,18 @@ export default {
       // 最近更新
       recentData: {
         title: '最近更新',
-        list: []
+        list: [],
       },
       // 美剧榜
       rankData: {
         title: '美剧榜',
-        list: []
+        list: [],
       },
       // 经典推荐
       classicData: {
         title: '经典推荐',
-        list: []
-      }
+        list: [],
+      },
     }
   },
   onLoad() {
@@ -65,7 +65,7 @@ export default {
       try {
         const res = await this.$myRequest({
           url:
-            'https://api.gankers.xyz/hanju/config/queryByKey?key=meiju_banner'
+            'https://api.gankers.xyz/hanju/config/queryByKey?key=meiju_banner',
         })
         // banner数据
         this.bannerList = res.data.data
@@ -79,7 +79,7 @@ export default {
       try {
         const res = await this.$myRequest({
           url:
-            'https://api.bjxkhc.com/index.php/app/ios/vod/index?size=10&page=1&desc=updateTime&diqu=%E7%BE%8E%E5%9B%BD'
+            'https://api.bjxkhc.com/index.php/app/ios/vod/index?size=10&page=1&desc=updateTime&diqu=%E7%BE%8E%E5%9B%BD',
         })
         // recent数据
         this.recentData.list = res.data.data
@@ -93,7 +93,7 @@ export default {
       try {
         const res = await this.$myRequest({
           url:
-            'https://api.gankers.xyz/hanju/config/queryByKey?key=meiju_tuijian'
+            'https://api.gankers.xyz/hanju/config/queryByKey?key=meiju_tuijian',
         })
         console.log(res)
         // rank数据
@@ -103,8 +103,14 @@ export default {
       } catch (error) {
         uni.showToast(error)
       }
-    }
-  }
+    },
+    // 获取到焦点就跳转到搜索页
+    handleFocus() {
+      uni.navigateTo({
+        url: '/pages/search/index',
+      })
+    },
+  },
 }
 
 // uni.showToast({
